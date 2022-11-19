@@ -4,15 +4,21 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
-    <div className="flex text-white">
-      <Link to="/">Movie Review</Link>
-      <ul className=" flex ">
-        <Link to="/login">Login</Link>
-        <Link to="/">
-          <FaRegUserCircle />
+    <header className=" bg-slate-900">
+      <div className=" flex text-white sticky p-6 justify-between w-full items-center max-w-[90%] m-auto">
+        <Link className=" text-yellow-500 font-bold text-2xl" to="/">
+          Movie Review
         </Link>
-      </ul>
-    </div>
+        <ul className=" flex items-center gap-4 ">
+          <Link className=" font-bold" to="/login">
+            Login
+          </Link>
+          <Link to="/">
+            <FaRegUserCircle size={30} />
+          </Link>
+        </ul>
+      </div>
+    </header>
   );
 };
 

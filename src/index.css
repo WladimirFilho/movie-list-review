@@ -6,4 +6,25 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  outline: none;
+}
+
+.error {
+  margin-top: 1rem;
+  color: #721c24 !important;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 8px;
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+.success {
+  margin-top: 1rem;
+  color: #24492c !important;
+  background-color: #99fcaf;
+  border: 1px solid #537c5c;
+  padding: 8px;
+  border-radius: 0.25rem;
+  text-align: center;
 }
