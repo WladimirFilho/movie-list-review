@@ -13,7 +13,7 @@ const NavBar = () => {
           <Link className=" font-bold" to="/login">
             Login
           </Link>
-          <Link to="/">
+          <Link to="/profile">
             <FaRegUserCircle size={30} />
           </Link>
         </ul>
