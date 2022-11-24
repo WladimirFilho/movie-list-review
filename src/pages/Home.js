@@ -3,6 +3,8 @@ import Card from "../components/Card";
 import { Link } from "react-router-dom";
 
 function Home() {
+
+
   return (
     <div className="p-8 mt-16 w-[90%] m-auto">
       <div className="flex items-center justify-between mb-20">

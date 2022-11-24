@@ -12,7 +12,7 @@ input {
 }
 
 .error {
-  margin-top: 1rem;
+  margin: 1.5rem 0;
   color: #721c24 !important;
   background-color: #f8d7da;
   border: 1px solid #f5c6cb;
@@ -22,7 +22,7 @@ input {
 }
 
 .success {
-  margin-top: 1rem;
+  margin: 1.5rem 0;
   color: #24492c !important;
   background-color: #99fcaf;
   border: 1px solid #537c5c;
@@ -30,6 +30,7 @@ input {
   border-radius: 0.25rem;
   text-align: center;
 }
+
 /* .poster-img {
   min-width: 500px;
   height: 700px;

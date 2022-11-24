@@ -20,22 +20,32 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(null);
 
   const auth = getAuth();
-  const actionCodeSettings = { url: "http://localhost:3001/" };
 
-  const register = async (data) => {
+  const register = async (email, password, username, modalTocloseAndOpen) => {
     setLoading(true);
     try {
       const { user } = await createUserWithEmailAndPassword(
         auth,
-        data.email,
-        data.password
+        email,
+        password
       );
-      await updateProfile(user, { displayName: data.username });
+      await updateProfile(user, { displayName: username });
       const userDb = {
-        username: data.username,
-        email: data.email,
+        username: username,
+        email: email,
       };
       await setDoc(doc(db, "users", user.uid), userDb);
-    } catch (err) {}
+      modalTocloseAndOpen(false);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
+      setLoading(false);
+    }
   };
+  const logoutUser = () => {
+    signOut(auth);
+  };
+
+  return { auth, register, logoutUser, error, message, loading };
 };
