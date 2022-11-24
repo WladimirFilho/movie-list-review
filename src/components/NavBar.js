@@ -5,6 +5,7 @@ import { useState } from "react";
 import Register from "./Register";
 import { useAuthValue } from "../context/AuthContext";
 import { useAuth } from "../hooks/useAuth";
+import Login from "./Login";
 
 const NavBar = () => {
   const [modalLogin, setModalLogin] = useState(false);
@@ -25,6 +26,7 @@ const NavBar = () => {
             <span
               onClick={() => {
                 setModalLogin(true);
+                setModalRegister(false);
               }}
               className=" cursor-pointer font-bold"
             >
@@ -33,6 +35,7 @@ const NavBar = () => {
             <span
               onClick={() => {
                 setModalRegister(true);
+                setModalLogin(false);
               }}
               className=" cursor-pointer font-bold"
             >
@@ -61,6 +64,12 @@ const NavBar = () => {
         isActive={modalRegister}
         changeToLogin={setModalLogin}
         modalTocloseAndOpen={setModalRegister}
+      />
+      <Login
+        isActive={modalLogin}
+        changeToRegister={setModalRegister}
+        modalTocloseAndOpen={setModalLogin}
+        changeToReset={setModalReset}
       />
     </header>
   );

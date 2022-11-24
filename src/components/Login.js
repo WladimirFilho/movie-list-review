@@ -1,47 +1,35 @@
 import { FirebaseError } from "firebase/app";
 import React, { useEffect, useState } from "react";
-import { useAuthValue } from "../context/AuthContext";
 import { useAuth } from "../hooks/useAuth";
 
-const Register = (props) => {
-  const [username, setUsername] = useState("");
+const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
 
   const modalChangeHandler = () => {
-    props.changeToLogin(true);
+    props.changeToRegister(true);
     props.modalTocloseAndOpen(false);
   };
 
-  const { register, error: firebaseError, loading } = useAuth();
+  const { loginUser, error: firebaseError, loading } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setError(null);
-    if (username === "") {
-      setError("empty username");
-      return;
-    } else if (email === "") {
+    if (email === "") {
       setError("empty email");
       return;
     } else if (password === "") {
       setError("empty password");
       return;
-    } else if (confirmPassword === "") {
-      setError("empty confirm password");
-      return;
-    } else if (password !== confirmPassword) {
-      setError("Password is not equal");
-      return;
     }
-    register(email, password, username, props.modalTocloseAndOpen);
+    loginUser(email, password, props.modalTocloseAndOpen);
     return;
   };
 
   useEffect(() => {
-    if (firebaseError) {
+    if (FirebaseError) {
       setError(firebaseError);
     }
   }, [firebaseError]);
@@ -72,17 +60,6 @@ const Register = (props) => {
 
       <form onSubmit={handleSubmit}>
         <label className="flex flex-col w-full ">
-          <span className="mb-2 font-bold">User name</span>
-          <input
-            className="p-2 rounded-lg text-black"
-            type="text"
-            value={username || ""}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
-        </label>
-        <label className="flex flex-col w-full ">
           <span className="mb-2 font-bold">Email</span>
           <input
             className="p-2 rounded-lg text-black"
@@ -104,22 +81,12 @@ const Register = (props) => {
             }}
           />
         </label>
-        <label className="flex flex-col w-full ">
-          <span className="mb-2 font-bold">Confirm password</span>
-          <input
-            className="p-2 rounded-lg text-black"
-            type="password"
-            value={confirmPassword || ""}
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-            }}
-          />
-        </label>
+
         {!loading && (
           <input
             className="w-full p-2 mt-6 mb-4 text-xl font-bold text-center text-white transition-all duration-200 bg-orange-400 rounded-lg cursor-pointer hover:bg-slate-700"
             type="submit"
-            value="Register"
+            value="Login"
           />
         )}
         {loading && (
@@ -132,17 +99,28 @@ const Register = (props) => {
         )}
         {error && <p className="error">{error}</p>}
       </form>
-      <div className="">
-        <span className=" mr-2">Already registered?</span>
-        <span
-          onClick={modalChangeHandler}
-          className=" font-bold text-yellow-500 transition-all duration-200 cursor-pointer hover:text-blue-500"
-        >
-          Login
-        </span>
+      <div>
+        <div className="">
+          <span className=" mr-2">Forgot password?</span>
+          <span
+            onClick={modalChangeHandler}
+            className=" font-bold text-yellow-500 transition-all duration-200 cursor-pointer hover:text-blue-500"
+          >
+            Reset
+          </span>
+        </div>
+        <div className="">
+          <span className=" mr-2">New user?</span>
+          <span
+            onClick={modalChangeHandler}
+            className=" font-bold text-yellow-500 transition-all duration-200 cursor-pointer hover:text-blue-500"
+          >
+            Register
+          </span>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Register;
+export default Login;

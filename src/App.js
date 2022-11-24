@@ -31,7 +31,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/details" element={<MoviesDetails />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={user ? <Profile /> : <Navigate to="/" />}
+          />
         </Routes>
         <Footer />
       </AuthContextProvider>

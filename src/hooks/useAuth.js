@@ -43,9 +43,55 @@ export const useAuth = () => {
       setLoading(false);
     }
   };
+
+  const loginUser = async (email, password, modalLogin) => {
+    setLoading(true);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      modalLogin(false);
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
   const logoutUser = () => {
     signOut(auth);
   };
 
-  return { auth, register, logoutUser, error, message, loading };
+  const changeUserName = async (user, username) => {
+    setLoading(true);
+    try {
+      await updateProfile(user, { displayName: username });
+      setMessege("Name changed");
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  const changePassword = async (user, password) => {
+    setLoading(true);
+    try {
+      await updatePassword(user, password);
+      setMessege("Name changed");
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  return {
+    auth,
+    register,
+    logoutUser,
+    loginUser,
+    changeUserName,
+    changePassword,
+    error,
+    message,
+    loading,
+  };
 };
