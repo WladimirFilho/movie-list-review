@@ -30,7 +30,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/details" element={<MoviesDetails />} />
+          <Route path="/details/:id" element={<MoviesDetails />} />
           <Route
             path="/profile"
             element={user ? <Profile /> : <Navigate to="/" />}

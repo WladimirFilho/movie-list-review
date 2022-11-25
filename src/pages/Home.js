@@ -1,9 +1,13 @@
 import React from "react";
 import Card from "../components/Card";
 import { Link } from "react-router-dom";
+import db from "../firebase/config";
+import { collection } from "firebase/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 function Home() {
-
+  const query = collection(db, "movies");
+  const [moviesList, loading, error, snapshot] = useCollectionData(query);
 
   return (
     <div className="p-8 mt-16 w-[90%] m-auto">
@@ -27,18 +31,16 @@ function Home() {
         </div>
       </div>
       <div className=" flex flex-wrap gap-4">
-        <Link to="/details">
-          <Card />
-        </Link>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {moviesList?.map((movie, index) => (
+          <Link key={index} to={`/details/${snapshot.docs[`${index}`].id}`}>
+            <Card
+              title={movie.title}
+              image={movie.image}
+              genre={movie.genre}
+              rating={movie.rating}
+            />
+          </Link>
+        ))}
       </div>
       <div className="p-28 flex flex-col items-center justify-center gap-16">
         <h2 className="text-2xl">

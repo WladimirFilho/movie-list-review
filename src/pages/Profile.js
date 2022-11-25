@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaRegUserCircle } from "react-icons/fa";
+import AddMovie from "../components/AddMovie";
 import Card from "../components/Card";
 import { useAuthValue } from "../context/AuthContext";
 import { useAuth } from "../hooks/useAuth";
@@ -135,6 +136,10 @@ const Profile = () => {
         {error && <p className="error">{error}</p>}
         {message && <p className="success">{message}</p>}
       </form>
+      <div>
+        <AddMovie />
+      </div>
+
       <div className="w-full ">
         <h2 className="w-full text-center font-bold text-[100px] tracking-tight my-20">
           My favorits
