@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import db from "../firebase/config";
 import { doc } from "firebase/firestore";
 import { useDocument } from "react-firebase-hooks/firestore";
+import AddToFavorits from "../components/AddToFavorits";
+import Comments from "../components/Comments";
 
 const MoviesDetails = () => {
   const { id } = useParams();
@@ -52,7 +54,7 @@ const MoviesDetails = () => {
             ))}
           </div>
           <div className="flex items-center gap-4">
-            <AiOutlineHeart size={30} />
+            <AddToFavorits data={movieData} movieId={id} />
             <span className=" text-2xl">{movieData?.genre}</span>
           </div>
           <p className="  text-xl text-justify">{movieData?.description}</p>
@@ -60,27 +62,7 @@ const MoviesDetails = () => {
       </div>
 
       {/* Comments section */}
-      <div className="flex flex-col gap-8 mt-10">
-        <h2 className=" pl-4 border-l-8 border-yellow-400 text-3xl font-bold">
-          User Reviews
-        </h2>
-        <form>
-          <input
-            type="text"
-            placeholder="Write your comment"
-            className="text-lg w-full bg-slate-50 p-5 rounded-lg border-2"
-          />
-        </form>
-        <div>
-          <p className=" text-xl font-bold mb-2">UserName</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-          </p>
-        </div>
-      </div>
+      <Comments id={id}/>
     </div>
   );
 };

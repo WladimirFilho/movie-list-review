@@ -37,7 +37,7 @@ const AddMovie = () => {
     }
     const data = {
       title,
-      imagePath,
+      image: imagePath,
       description,
       rating,
       genre,

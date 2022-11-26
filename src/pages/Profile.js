@@ -4,9 +4,16 @@ import AddMovie from "../components/AddMovie";
 import Card from "../components/Card";
 import { useAuthValue } from "../context/AuthContext";
 import { useAuth } from "../hooks/useAuth";
+import db from "../firebase/config";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import { collection } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useAuthValue();
+
+  const favoritesRef = collection(db, `users/${user?.uid}/favorites`);
+  const [favorites] = useCollectionData(favoritesRef);
 
   const [username, setUsername] = useState(user.displayName);
   const [password, setPassword] = useState("");
@@ -145,10 +152,16 @@ const Profile = () => {
           My favorits
         </h2>
         <div className="flex gap-4">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {favorites?.map((favorite, index) => (
+            <Link key={index} to={`/details/${favorite.id}`}>
+              <Card
+                title={favorite.title}
+                image={favorite.image}
+                genre={favorite.genre}
+                rating={favorite.rating}
+              />
+            </Link>
+          ))}
         </div>
       </div>
     </div>
