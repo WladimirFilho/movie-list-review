@@ -14,7 +14,7 @@ const Card = (props) => {
 
   useEffect(() => {
     setStars(setRatingStars(props.rating));
-  }, []);
+  }, [props.rating]);
 
   return (
     <div className=" flex flex-col gap-2  relative w-[200px] mt-4 cursor-pointer">

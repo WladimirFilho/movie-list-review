@@ -126,14 +126,14 @@ const AddMovie = () => {
 
       {!loading && (
         <input
-          className="w-full p-2 mt-6 mb-4 text-xl font-bold text-center text-white transition-all duration-200 bg-orange-400 rounded-lg cursor-pointer hover:bg-slate-700"
+          className=" px-8 py-2 font-bold transition-all duration-300 border-2 border-black cursor-pointer hover:bg-blue-500 hover:text-white mt-2"
           type="submit"
           value="Add movie"
         />
       )}
       {loading && (
         <input
-          className="w-full p-2 mt-6 mb-4 text-xl font-bold text-center text-white transition-all duration-200 bg-orange-400 rounded-lg cursor-pointer disabled"
+          className="w-full px-8 py-2 font-bold text-center border-2 border-black mt-2"
           type="submit"
           value="Loading ..."
         />

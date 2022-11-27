@@ -12,7 +12,7 @@ const AddToFavorits = (props) => {
   const favoritesRef = collection(db, `users/${user?.uid}/favorites`);
   const [favorites] = useCollectionData(favoritesRef);
   const { insertDocument } = useInsertDocument(`users/${user?.uid}/favorites`);
-  const { deleteDocument } = useDeleteDocument(`users/${user.uid}/favorites`);
+  const { deleteDocument } = useDeleteDocument(`users/${user?.uid}/favorites`);
 
   const [isFavorite, setIsFavorite] = useState(false);
 

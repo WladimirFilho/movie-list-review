@@ -1,15 +1,16 @@
-import { collection } from "firebase/firestore";
 import React, { useState } from "react";
 import { useAuthValue } from "../context/AuthContext";
-import db from "../firebase/config";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useInsertDocument } from "../hooks/useInsertDocument";
 import { useDeleteDocument } from "../hooks/useDeleteDocument";
+import { useFetchDocuments } from "../hooks/useFetchDocuments";
 
 const Comments = (props) => {
   const { user } = useAuthValue();
-  const commentsRef = collection(db, `movies/${props.id}/comments`);
-  const [comments] = useCollectionData(commentsRef);
+  const { documents: comments } = useFetchDocuments(
+    `movies/${props.id}/comments`
+  );
+  console.log(comments);
+
   const { insertDocument } = useInsertDocument(`movies/${props.id}/comments`);
   const { deleteDocument } = useDeleteDocument(`movies/${props.id}/comments`);
 
@@ -59,7 +60,19 @@ const Comments = (props) => {
           .map((comment, index) => (
             <div className=" py-2 border-b-2 border-yellow-400" key={index}>
               <p className="  text-xl font-bold mb-2">{comment.username}</p>
-              <p className=" text-gray-500 italic py-2">{comment.comments}</p>
+              <div className="flex justify-between items-center">
+                <p className=" text-gray-500 italic py-2">{comment.comments}</p>
+                {user.uid === comment.user && (
+                  <p
+                    onClick={() => {
+                      deleteDocument(comment.id);
+                    }}
+                    className="py-2 italic text-red-500 cursor-pointer font-bold"
+                  >
+                    Delete
+                  </p>
+                )}
+              </div>
             </div>
           ))}
       </div>

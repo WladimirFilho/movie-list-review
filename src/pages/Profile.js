@@ -143,13 +143,14 @@ const Profile = () => {
         {error && <p className="error">{error}</p>}
         {message && <p className="success">{message}</p>}
       </form>
-      <div>
+      <div className="flex flex-col gap-4 max-w-[800px]">
+        <h3 className=" mt-8 font-bold text-2xl">Add a new Movie</h3>
         <AddMovie />
       </div>
 
       <div className="w-full ">
         <h2 className="w-full text-center font-bold text-[100px] tracking-tight my-20">
-          My favorits
+          My favorites
         </h2>
         <div className="flex gap-4">
           {favorites?.map((favorite, index) => (
