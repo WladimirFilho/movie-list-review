@@ -11,7 +11,7 @@ const AddMovie = () => {
   const [message, setMessage] = useState(null);
 
   const {
-    inserDocument,
+    insertDocument,
     error: firebaseError,
     message: firebaseMessage,
     loading,
@@ -43,7 +43,7 @@ const AddMovie = () => {
       genre,
     };
 
-    inserDocument(data);
+    insertDocument(data);
     e.target.reset();
     return;
   };
@@ -53,7 +53,7 @@ const AddMovie = () => {
       setError(firebaseError);
     }
     if (firebaseMessage) {
-      setError(firebaseMessage);
+      setMessage(firebaseMessage);
     }
   }, [firebaseError, firebaseMessage]);
 
